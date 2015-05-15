@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html ng-app="store">
+    <head>
+        <link type="text/css" href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <body  ng-controller="StoreController as store">
+        <div ng-hide="store.product.soldOut">
+            <h1>{{store.product.name}}</h1>
+            <h2>{{store.product.price}}</h2>
+            <p>{{store.product.description}}</p>
+            <button ng-show="store.product.canPurchase"> Add to Cart </button>
+        </div>
+        
+        <!--Angular-->
+        <script src="~/Content/js/angular.min.js"></script>
+        <script src="~/Content/js/app.js"></script>
+    </body>
+</html>
