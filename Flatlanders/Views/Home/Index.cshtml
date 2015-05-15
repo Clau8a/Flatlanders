@@ -9,13 +9,43 @@
         <link type="text/css" href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     </head>
     <body  ng-controller="StoreController as store">
-        <div ng-hide="store.product.soldOut">
-            <h1>{{store.product.name}}</h1>
-            <h2>{{store.product.price}}</h2>
-            <p>{{store.product.description}}</p>
-            <button ng-show="store.product.canPurchase"> Add to Cart </button>
+        <div ng-repeat="product in store.products">
+            <h1>{{product.name}}</h1>
+            <h2>{{product.price}}</h2>
+            <p>{{product.description}}</p>
+            <button ng-show="product.canPurchase"> Add to Cart </button>
         </div>
-        
+
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="product in store.products">
+                <h3>
+                    {{product.name}}
+                    <em class="pull-right">{{product.price | currency}}</em>
+                  <br />
+                      <img ng-src="{{product.images[0].full}}"/>
+                </h3>
+                <section  ng-controller="PanelController">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+                        <li ng-class="{active:active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Spesifications</a></li>
+                        <li ng-class="{active:active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
+                    </ul>
+
+                    <div class="panel" ng-show="panel.isSelected(1)">
+                        <h4>Description</h4>
+                        <p>{{product.description}}</p>
+                    </div>
+                    <div class="panel" ng-show="panel.isSelected(2)">
+                        <h4>Specifications</h4>
+                        <p>None yet</p>
+                    </div>
+                    <div class="panel" ng-show="panel.isSelected(3)">
+                        <h4>Reviews</h4>
+                        <p>None yet</p>
+                    </div>
+                </section>
+            </li>
+        </ul>
         <!--Angular-->
         <script src="~/Content/js/angular.min.js"></script>
         <script src="~/Content/js/app.js"></script>
