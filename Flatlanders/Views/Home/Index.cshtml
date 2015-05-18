@@ -6,8 +6,9 @@
 <!DOCTYPE html>
 <html ng-app="store">
     <head>
+    <title>@ViewBag.Title</title>
         <link type="text/css" href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
-    </head>
+        <link href="~/Content/style.css" rel="stylesheet" /></head>
     <body  ng-controller="StoreController as store">
         
 
@@ -41,22 +42,23 @@
                             {{review.body}}
                             <cite>by: {{review.author}}</cite>
                         </blockquote>
-                        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+                        <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
                             <blockquote>
                                 <b>Stars: {{reviewCtrl.review.stars}}</b>
                                 {{reviewCtrl.review.body}}
                                 <cite>by: {{reviewCtrl.review.author}}</cite>
                             </blockquote>
-                            <select ng-model="reviewCtrl.review.stars">
+                            <select ng-model="reviewCtrl.review.stars" required>
                                 <option value="1">1 star</option>
                                 <option value="2">2 stars</option>
                                 <option value="3">3 stars</option>
                                 <option value="4">4 stars</option>
                                 <option value="5">5 stars</option>
                             </select>
-                            <textarea ng-model="reviewCtrl.review.body"></textarea>
+                            <textarea ng-model="reviewCtrl.review.body" required></textarea>
                             <label>by:</label>
-                            <input ng-model="reviewCtrl.review.author" type="email" />
+                            <input name="author" ng-model="reviewCtrl.review.author" type="email"  class="ng-dirty ng-valid" required />
+                            <div>reviwForm is {{reviewForm.$valid}}</div>
                             <input type="submit" value="Submit" />
                         </form>
                     </div>
