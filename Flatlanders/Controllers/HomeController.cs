@@ -16,5 +16,9 @@ namespace Flatlanders.Controllers
             return View();
         }
 
+        public ActionResult productTitle()
+        {
+           return View();
+        }
     }
 }

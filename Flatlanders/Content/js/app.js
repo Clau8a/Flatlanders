@@ -1,8 +1,14 @@
 ﻿(function () {
     var app = angular.module('store', []);
-    app.controller('StoreController', function() {
-        this.products = gems;
-    });
+    app.controller('StoreController',['$http', function ($http) {
+        var store = this;
+
+        store.products = [];
+
+        $http.get('Content/js/products.json').success(function (data){
+            store.products = data;
+        });
+    }]);
     
     app.controller('PanelController', function() {
         this.tab = 1;
@@ -23,36 +29,12 @@
         };
     });
 
-    var gems = [
-        {
-            name: 'Dodecahedron',
-            price: 2.95,
-            description: 'this is our best gem because it has a lot  of colors and properties thar cure the cancer',
-            canPurchase: true,
-            images: [
-                {
-                    full:'/Content/img/gem-02.jpg',
-                    thumb:'/Content/img/gem-02.jpg',
-                }
-            ],
-            reviews: [
-                {
-                    stars: 5,
-                    body: "I love this product",
-                    author: "joe@thomas.com"
-                },
-                {
-                    stars: 1,
-                    body: "This product sucks",
-                    author: "tim@hater.com"
-                }
-            ]
-        },
-        {
-            name: 'Pentagonal Gem',
-            price: 5.95,
-            description: '. . .',
-            canPurchase: false
-        }  
-    ];
+    app.directive('productTitle', function () {
+        return {
+            restric: 'E',
+            templateurl:''
+        }
+    });
+
+    
 })();
